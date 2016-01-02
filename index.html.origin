@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="google" value="notranslate">
+	<title>TMK Keymap Generator</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<script src="/analytics.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/jquery/dist/jquery.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/underscore/underscore-min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/jquery-lang-js/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/jquery-cookie/jquery.cookie.js" charset="utf-8" type="text/javascript"></script>
+	<script src="./bower_components/chardin.js/chardinjs.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/keycode_map.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/fn_map.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/led_map.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/tkg.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/layer.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/fn.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/led.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/keyboard_config.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/burn.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/bootloader_printer.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/bootloader_dfu.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/tour.js" charset="utf-8" type="text/javascript"></script>
+	<script src="js/main.js" charset="utf-8" type="text/javascript"></script>
+	<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css">
+	<link rel="stylesheet" href="./bower_components/bootstrap-multiselect/dist/css/bootstrap-multiselect.css">
+	<link rel="stylesheet" href="./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+	<link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="./bower_components/chardin.js/chardinjs.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div id="wrapper">
+		<div class="navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" id="logo" href="#">TMK Keymap Generator <sup>BETA</sup></a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li>
+							<a id="home" class="navbar-brand" href="#" lang="en">Home</a>
+						</li>
+						<li>
+							<a id="help" class="navbar-brand" href="#help" lang="en">Help</a>
+						</li>
+						<li>
+							<a id="about" class="navbar-brand" href="#about" lang="en">About</a>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="javascript:void(0)" id="tools" role="button" class="dropdown-toggle" data-toggle="dropdown"><span lang="en">Tools</span> <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="tools">
+								<li role="presentation">
+									<a id="tools-show-tour" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-info-sign"></i> <span lang="en">Show Tour</span></a>
+								</li>
+								<li role="presentation">
+									<a id="tools-stat" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-stats"></i> <span lang="en">Statistics</span></a>
+								</li>
+								<li class="divider" role="presentation"></li>
+								<li class="menu-item dropdown dropdown-submenu" role="presentation">
+									<a role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-th-list"></i> <span lang="en">View</span> </a>
+									<ul class="dropdown-menu" role="menu">
+										<li class="menu-item dropdown dropdown-submenu" role="presentation">
+											<a role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-sort"></i> <span lang="en">Sort by</span></a>
+											<ul class="dropdown-menu" role="menu">
+												<li role="presentation">
+													<a class="tools-view-sortby" id="tools-view-sortby-name" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-ok" style="visibility:hidden;"></i> <span lang="en">Name</span></a>
+												</li>
+												<li role="presentation">
+													<a class="tools-view-sortby" id="tools-view-sortby-size" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-ok" style="visibility:hidden;"></i> <span lang="en">Size</span></a>
+												</li>
+											</ul>
+										</li>
+										<li class="divider" role="presentation"></li>
+										<li role="presentation">
+											<a id="tools-view-group" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-ok" style="visibility:hidden;"></i> <span lang="en">Group</span></a>
+										</li>
+									</ul>
+								</li>
+								<li class="divider" role="presentation"></li>
+								<li class="disabled" role="presentation">
+									<a id="tools-import-fn" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-import"></i> <span lang="en">Import Fn</span></a>
+								</li>
+								<li class="disabled" role="presentation">
+									<a id="tools-export-fn" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-export"></i> <span lang="en">Export Fn</span></a>
+								</li>
+								<li class="divider" role="presentation"></li>
+								<li role="presentation">
+									<a id="tools-advanced-mode" role="menuitem" tabindex="-1" href="javascript:void(0)"><i class="glyphicon glyphicon-ok" style="visibility:hidden;"></i> <span lang="en">Advanced Mode</span></a>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="javascript:void(0)" id="change-lan" role="button" class="dropdown-toggle" data-toggle="dropdown"><span lang="en">Language</span> <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="change-lan">
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="onLangChange('en');">English</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="onLangChange('ja');">日本語</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="onLangChange('zh_sc');">中文（简体）</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" href="javascript:void(0)" onclick="onLangChange('zh_tc');">中文（繁體）</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="pg-home" class="page container">
+			<form id="config-form" class="form-horizontal" role="form">
+				<fieldset>
+					<legend data-toggle="collapse" data-target="#general-field"><span lang="en">General</span><div class="pull-right"><span class="glyphicon glyphicon-chevron-up"></span></div></legend>
+					<div id="general-field" class="collapse in">
+						<div class="form-group">
+							<label for="keyboard-sel" lang="en" class="col-md-2 control-label">Keyboard</label>
+							<div class="col-md-6">
+								<div class="btn-group input-group">
+									<select id="keyboard-sel" class="form-control"></select>
+									<div id="kbd-cfg" class="btn-group" style="display: none;">
+										<button type="button" id="kbd-cfg-btn" class="btn btn-default" lang="en">Config</button>
+									</div>
+									<span id="kbd-info" class="input-group-addon" lang="en">Detail</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend data-toggle="collapse" data-target="#layer-field"><span lang="en">Layer</span><div class="pull-right"><span class="glyphicon glyphicon-chevron-up"></span></div></legend>
+					<div id="layer-field" class="collapse in">
+						<div id="layer-mode" class="form-group">
+							<label for="layer-mode-normal" lang="en" class="col-md-2 control-label">Layer Mode</label>
+							<div class="col-md-5">
+								<div class="btn-group">
+									<button id="layer-mode-normal" class="btn btn-primary active" lang="en">Normal</button>
+									<button id="layer-mode-simple" class="btn btn-default" lang="en">Simple</button>
+									<button id="layer-mode-allinone" class="btn btn-default" lang="en">All-in-One</button>
+								</div>
+							</div>
+						</div>
+						<div id="layer-wrapper">
+						</div>
+					</div>
+				</fieldset>
+				<fieldset style="display: none;">
+					<legend id="fn-legend" data-toggle="collapse" data-target="#fn-field"><span lang="en">Fn</span><div class="pull-right"><span class="glyphicon glyphicon-chevron-up"></span></div></legend>
+					<div id="fn-field" class="collapse in">
+						<div id="fn-wrapper">
+						</div>
+					</div>
+				</fieldset>
+				<fieldset style="display: none;">
+					<legend data-toggle="collapse" data-target="#led-field"><span lang="en">LED</span><div class="pull-right"><span class="glyphicon glyphicon-chevron-down"></span></div></legend>
+					<div id="led-field" class="collapse">
+						<div id="led-wrapper">
+						</div>
+					</div>
+				</fieldset>
+				<hr>
+				<div class="form-group">
+					<div id="btns" class="col-md-offset-2 col-md-6">
+						<button id="dl_eep" type="button" class="dl-btn dl-btn-restrict btn btn-default"><span class="glyphicon glyphicon-floppy-disk"></span> <span lang="en">Download .eep file</span></button>
+						<button id="dl_c" type="button" class="dl-btn dl-btn-restrict btn btn-default"><span class="glyphicon glyphicon-floppy-disk"></span> <span lang="en">Download .c file</span></button>
+					</div>
+				</div>
+			</form>
+			<!-- popover: containers -->
+			<div id="kbd-info-container"></div>
+			<div id="kbd-cfg-container"></div>
+			<div id="layer-info-container"></div>
+			<div id="key-info-container"></div>
+			<!-- popover: kimera config -->
+			<div id="kimera-config" style="display: none;">
+				<!--
+				<div id="kimera-config-inner">
+					<form class="form-horizontal" role="form">
+						<div id="kimera-error" class="alert alert-danger" lang="en" style="display: none;">Please set at least one valid Row or Col.</div>
+						<div id="kimera-row" class="form-group">
+							<label for="kimera-row-val"><abbr title="Input port numbers orderly. Use commas to separate numbers and backspace to delete numbers. Invalid values are shown in red." lang="en">Row Mapping</abbr></label>
+							<label class="pull-right">
+								<a id="kimera-row-clear" class="text-muted" href="javascript:void(0)" data-toggle="tooltip" data-placement="right" lang="en" title="Remove all">
+									<span class="glyphicon glyphicon-trash"><span>
+								</a>
+							</label>
+							<div class="" style="width: 100%;">
+								<input id="kimera-row-val" type="text" class="form-control" data-mapping="row" placeholder="Add Row" lang="en" />
+							</div>
+						</div>
+						<div id="kimera-col" class="form-group">
+							<label for="kimera-col-val"><abbr title="Input port numbers orderly. Use commas to separate numbers and backspace to delete numbers. Invalid values are shown in red." lang="en">Col Mapping</abbr></label>
+							<label class="pull-right">
+								<a id="kimera-col-clear" class="text-muted" href="javascript:void(0)" data-toggle="tooltip" data-placement="right" lang="en" title="Remove all">
+									<span class="glyphicon glyphicon-trash"><span>
+								</a>
+							</label>
+							<div class="">
+								<input id="kimera-col-val" type="text" class="form-control" data-mapping="col" placeholder="Add Col" lang="en" />
+							</div>
+						</div>
+						<div id="kimera-matrix" class="form-group">
+							<label for="kimera-matrix-val"><abbr title='Input mapping data between key and Row/Col. The correct format is "n-th row,n-th col".' lang="en">Matrix Mapping</abbr></label>
+							<div class="">
+								<textarea id="kimera-matrix-val" spellcheck="false" class="form-control kle-layer" rows=4 placeholder="Paste URL or Raw Data here" lang="en"></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				-->
+			</div>
+		</div>
+		<div id="pg-about" class="page container" style="display:none;">
+			<div class="col-md-offset-2 col-md-8">
+				<h3 lang="en">About TMK Keymap Generator</h3>
+				<p>
+					<span lang="en">TMK Keymap Generator, aka TKG, is a generator that can convert layout created by <a id="a-kle">keyboard-layout-editor</a> into an available keymap for <a id="a-tmk">TMK Keyboard Firmware Collection</a>.</span>
+				</p>
+				<p>
+					<span lang="en">You can make a keyboard layout by <a id="a-kle">keyboard-layout-editor</a> as you like, copy the Raw Data and paste them into TKG, set some Fn keys as you want, and click Download button then you will get the configurations what can works with your <a id="a-tmk">TMK Firmware</a> inside keyboard. It is quite easy to use.</span>
+				</p>
+				<p>
+				<span lang="en">TKG is an open source software published under <a href="http://en.wikipedia.org/wiki/WTFPL">WTFPL</a>. You can find the codes on <a id="a-tkg">GitHub</a>.</span>
+				</p>
+				<h4 lang="en">Special Thanks</h4>
+				<p>
+					<span lang="en"><a id="a-kle-author">Ian Prest</a>, the author of <a id="a-kle">keyboard-layout-editor</a>.</span><br/>
+					<span lang="en"><a id="a-tmk-author">tmk</a>, the author of <a id="a-tmk">TMK Keyboard Firmware Collection</a>.</span><br/>
+					<span lang="en">And also thanks to my <a id="a-wife">wife</a> and my newborn son.</span>
+				</p>
+				<h4 lang="en">Report Bugs</h4>
+				<p>
+					<span lang="en">If you found any bug, please contact me freely by <a id="a-mail">email</a>, or file a issue via <a id="a-issue">GitHub</a>. Any comments or requests are welcome too.</span>
+				</p>
+			</div>
+		</div>
+		<div id="pg-help" class="page container" style="display:none;">
+			<div class="col-md-offset-2 col-md-8">
+				<h3 lang="en">Help</h3>
+				<h4 lang="en">How to Use</h4>
+				<p></p>
+				<h4 lang="en">Available Labels</h4>
+				<div id="available-labels"></div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="container">
+			<p class="text-muted credit">
+				TMK Keymap Generator 2014 by <a href="https://github.com/kairyu">kai1103</a>
+			</p>
+		</div>
+	</div>
+	<!-- prompt dialog: statistics -->
+	<div class="modal fade" id="stat-dialog" tab-index="-1" data-keyboard="true" role="dialog" aria-labelledby="stat-title" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="stat-title" lang="en">Statistics</h4>
+				</div>
+				<div class="modal-body">
+					<dl class="dl-horizontal">
+						<dt lang="en">Number of Layers:</dt><dd id="stat-layer-count">0</dd>
+						<dt lang="en">Number of Fns:</dt><dd id="stat-fn-count">0</dd>
+						<dt lang="en">Number of Keys:</dt><dd id="stat-key-count">0</dd>
+					</dl>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" lang="en">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- prompt dialog: import fn -->
+	<div class="modal fade" id="import-fn-dialog" tab-index="-1" data-keyboard="true" role="dialog" aria-labelledby="import-fn-title" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="import-fn-title" lang="en">Import Fn</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="import-fn-val" lang="en">Paste data here:</label>
+						<textarea id="import-fn-val" class="form-control" rows="6" spellcheck="false"></textarea>
+					</div>
+					<div id="import-fn-error" class="alert alert-danger hide">
+						<strong lang="en">Error!</strong> <span lang="en">Please check your data!</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" lang="en">Cancel</button>
+					<button class="btn btn-primary" id="import-fn-button" lang="en">Import</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- prompt dialog: export fn -->
+	<div class="modal fade" id="export-fn-dialog" tab-index="-1" data-keyboard="true" role="dialog" aria-labelledby="export-fn-title" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="export-fn-title" lang="en">Export Fn</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="export-fn-val" lang="en">Copy and save following data:</label>
+						<textarea id="export-fn-val" class="form-control" rows="6" spellcheck="false"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal" lang="en">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

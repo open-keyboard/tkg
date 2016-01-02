@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/**
+ *
+ * @authors Ted Shiu (tedshd@gmail.com)
+ * @date    2015-12-26 19:05:24
+ * @version $Id$
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+    clear: both;
+}
+.hide {
+    display: none;
+}
+.heightlight {
+    border: 7px solid red;
+}
+.focus {
+    /*border-bottom: 3px solid red;*/
+    background-color: #eee;
+}
+
+#keyboard_container {
+    width: 840px;
+}
+#layer_count ul li {
+    float: left;
+    font-size: 1.5em;
+}
