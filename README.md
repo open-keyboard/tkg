@@ -3,6 +3,7 @@ tkg
 
 TMK Keymap Generator
 
+Fork from
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kairyu/tkg/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[https://github.com/kairyu/tkg](https://github.com/kairyu/tkg)
 
