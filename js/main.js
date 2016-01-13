@@ -488,7 +488,7 @@ function appendNotification() {
 function showNotification() {
 	appendNotification();
 	$('.navbar-fixed-top').css('top', '29px');
-	$('body').css('padding-top', '79px');
+	// $('body').css('padding-top', '79px');
 }
 
 function onLangChange(lang) {

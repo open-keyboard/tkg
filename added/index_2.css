@@ -30,6 +30,26 @@
     width: 840px;
 }
 #layer_count ul li {
+    position: relative;
     float: left;
     font-size: 1.5em;
+}
+#layer_count ul li span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    display: none;
+}
+#layer_count ul li:hover span {
+    display: block;
+}
+#layer {
+    width: 840px;
+    float: left;
+}
+#keys_other {
+    float: left;
+    width: 320px;
+    margin-left: 10px;
 }

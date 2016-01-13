@@ -26,6 +26,7 @@ function initKeyboard () {
     var ansi = KEY.ansi,
         keyboard = document.createElement('div'),
         rowCount = [8, 12, 13, 14, 14];
+    layerCount++;
     keyboard.setAttribute('class', 'keyboard layerCount_' + layerCount + ' clearfix');
     for (var i = 5 - 1; i >= 0; i--) {
         var row = document.createElement('div');
@@ -41,7 +42,6 @@ function initKeyboard () {
     }
     keyboardContainer.appendChild(keyboard);
     bindClick(document.querySelector('.layerCount_' + layerCount));
-    layerCount++;
 }
 
 initKeyboard();

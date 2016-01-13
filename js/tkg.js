@@ -526,6 +526,7 @@ function TKG() {
 		// parse fns from layer
 		fns = _parseFns(layer);
 		fns = _mergeFns(_fns, fns);
+                console.log('XXX', fns);
 		_fns = _cleanFns(fns, _layers);
 		_consoleInfo("fns:");
 		_consoleInfo(fns);
@@ -1567,6 +1568,7 @@ function TKG() {
 			return _fns[index];
 		}
 		else {
+                console.log('GGG', _fns);
 			return _fns;
 		}
 	}

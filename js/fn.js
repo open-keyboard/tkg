@@ -13,6 +13,7 @@ function emptyFns() {
 function appendFns() {
 	emptyFns();
 	var fns = tkg.getFns();
+        console.log('fns', fns);
 	if (fns.length) {
 		for (var index in fns) {
 			var fn = fns[index];

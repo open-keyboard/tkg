@@ -7,6 +7,32 @@
 <link rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset200802.css">
 <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/underscore/underscore-min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/bootstrap3-typeahead/bootstrap3-typeahead.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/bootstrap-multiselect/dist/js/bootstrap-multiselect.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/jquery-lang-js/js/jquery-lang.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/jquery-cookie/jquery.cookie.js" charset="utf-8" type="text/javascript"></script>
+    <script src="./bower_components/chardin.js/chardinjs.min.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/keycode_map.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/fn_map.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/led_map.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/tkg.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/layer.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/fn.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/led.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/keyboard_config.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/burn.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/bootloader_printer.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/bootloader_dfu.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/tour.js" charset="utf-8" type="text/javascript"></script>
+    <script src="js/main.js" charset="utf-8" type="text/javascript"></script>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap-multiselect/dist/css/bootstrap-multiselect.css">
+    <link rel="stylesheet" href="./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 <link href="added/keycap.css" rel="stylesheet">
 <link href="added/index_2.css" rel="stylesheet">
 <style>
@@ -106,7 +132,10 @@
     <div class="pure-u-1 pure-u-md-1-3">
         <div class="pure-menu pure-menu-horizontal custom-can-transform">
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Download .c</a></li>
+                <li class="pure-menu-item">
+                    <button id="dol_c" class="pure-button pure-button-primary">Download .c</button>
+                    <!-- <button id="dol_eep" class="pure-button pure-button-primary">Download .eep</button> -->
+                </li>
             </ul>
         </div>
     </div>
@@ -118,7 +147,7 @@
         </div>
     </div>
 </div>
-<main>
+<main class="clearfix">
     <div id="layer">
         <div id="layer_count" class="pure-menu pure-menu-horizontal clearfix">
             <ul class="pure-menu-list">
@@ -134,7 +163,22 @@
         </div> -->
         <div id="keyboard_container"></div>
     </div>
+    <div id="keys_other">
+        <button class="pure-button" data-key="KC_FN0">fn0</button>
+        <button class="pure-button" data-key="KC_FN1">fn1</button>
+        <button class="pure-button" data-key="KC_FN2">fn2</button>
+        <button class="pure-button" data-key="KC_FN3">fn3</button>
+        <button class="pure-button" data-key="KC_FN4">fn4</button>
+        <button class="pure-button" data-key="KC_FN5">fn5</button>
+        <button class="pure-button" data-key="KC_FN6">fn6</button>
+        <button class="pure-button" data-key="KC_FN7">fn7</button>
+        <button class="pure-button" data-key="KC_FN8">fn8</button>
+        <button class="pure-button" data-key="KC_AUDIO_MUTE">Mute</button>
+        <button class="pure-button" data-key="KC_AUDIO_VOL_UP">Vol Up</button>
+        <button class="pure-button" data-key="KC_AUDIO_VOL_DOWN">Vol Down</button>
+    </div>
 </main>
+<div id="fn-wrapper"></div>
 </body>
 <script src="added/var.js"></script>
 <script src="added/keymaps.js"></script>

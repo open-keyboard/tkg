@@ -6,7 +6,15 @@
  */
 
 var KEY_MAP_GEN = {
-    iso: {"0":[["KC_GRV","KC_1","KC_2","KC_3","KC_4","KC_5","KC_6","KC_7","KC_8","KC_9","KC_0","KC_MINS","KC_EQL","KC_BSPC"],["KC_TAB","KC_Q","KC_W","KC_E","KC_R","KC_T","KC_Y","KC_U","KC_I","KC_O","KC_P","KC_LBRC","KC_RBRC","KC_BSLS"],["KC_CAPS","KC_A","KC_S","KC_D","KC_F","KC_G","KC_H","KC_J","KC_K","KC_L","KC_SCLN","KC_QUOT","KC_NO","KC_ENT"],["KC_LSFT","KC_NO","KC_Z","KC_X","KC_C","KC_V","KC_B","KC_N","KC_M","KC_COMM","KC_DOT","KC_SLSH","KC_NO","KC_LSFT"],["KC_LCTL","KC_LGUI","KC_LALT","KC_NO","KC_NO","KC_TRNS","KC_NO","KC_NO","KC_NO","KC_NO","KC_LALT","KC_LGUI","KC_APP","KC_LCTL"]]}
+    iso: {
+        "0": [
+            ["KC_GRV", "KC_1", "KC_2", "KC_3", "KC_4", "KC_5", "KC_6", "KC_7", "KC_8", "KC_9", "KC_0", "KC_MINS", "KC_EQL", "KC_BSPC"],
+            ["KC_TAB", "KC_Q", "KC_W", "KC_E", "KC_R", "KC_T", "KC_Y", "KC_U", "KC_I", "KC_O", "KC_P", "KC_LBRC", "KC_RBRC", "KC_BSLS"],
+            ["KC_CAPS", "KC_A", "KC_S", "KC_D", "KC_F", "KC_G", "KC_H", "KC_J", "KC_K", "KC_L", "KC_SCLN", "KC_QUOT", "KC_NO", "KC_ENT"],
+            ["KC_LSFT", "KC_NO", "KC_Z", "KC_X", "KC_C", "KC_V", "KC_B", "KC_N", "KC_M", "KC_COMM", "KC_DOT", "KC_SLSH", "KC_NO", "KC_LSFT"],
+            ["KC_LCTL", "KC_LGUI", "KC_LALT", "KC_NO", "KC_NO", "KC_TRNS", "KC_NO", "KC_NO", "KC_NO", "KC_NO", "KC_LALT", "KC_LGUI", "KC_APP", "KC_LCTL"]
+        ]
+    }
 };
 
 var KEY_MAP = {
@@ -613,38 +621,32 @@ var KEY_MAP = {
 };
 
 var KEY = {
-    ansi: [
-        {
-            val: ['Ctrl', 'Win', 'Alt', 'Spacebar', 'Alt', 'Win', 'Menu', 'Ctrl'],
-            keyCode: ['17_1', '91_1', '18_1', '32_0', '18_2', '92_0', '93_0', '17_2'],
-            size: ['1_25', '1_25', '1_25', '6_25', '1_25', '1_25', '1_25', '1_25'],
-            key: ['KC_LCTL', 'KC_LGUI', 'KC_LALT', 'KC_TRNS', 'KC_LALT', 'KC_LGUI', 'KC_APP', 'KC_LCTL']
-        },
-        {
-            val: ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift'],
-            keyCode: ['16_1', '90_0', '88_0', '67_0', '86_0', '66_0', '78_0', '77_0', '188_0', '190_0', '191_0', '16_2'],
-            size: ['2_25', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_75'],
-            key: ['KC_LSFT', 'KC_Z', 'KC_X', 'KC_C', 'KC_V', 'KC_B', 'KC_N', 'KC_M', 'KC_COMM', 'KC_DOT', 'KC_SLSH', 'KC_LSFT']
-        },
-        {
-            val: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter'],
-            keyCode: ['20_0', '65_0', '83_0', '68_0', '70_0', '71_0', '72_0', '74_0', '75_0', '76_0', '186_0', '222_0', '13_0'],
-            size: ['1_75', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_25'],
-            key: ['KC_CAPS', 'KC_A', 'KC_S', 'KC_D', 'KC_F', 'KC_G', 'KC_H', 'KC_J', 'KC_K', 'KC_L', 'KC_SCLN', 'KC_QUOT', 'KC_ENT']
-        },
-        {
-            val: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\/'],
-            keyCode: ['9_0', '81_0', '87_0', '69_0', '82_0', '84_0', '89_0', '85_0', '73_0', '79_0', '80_0', '219_0', '221_0', '220_0'],
-            size: ['1_5', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1_5'],
-            key: ['KC_TAB', 'KC_Q', 'KC_W', 'KC_E', 'KC_R', 'KC_T', 'KC_Y', 'KC_U', 'KC_I', 'KC_O', 'KC_P', 'KC_LBRC', 'KC_RBRC', 'KC_BSLS']
-        },
-        {
-            val: [ '~', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Back Space'],
-            keyCode: ['192_0', '49_0', '50_0', '51_0', '52_0', '53_0', '54_0', '55_0', '56_0', '57_0', '48_0', '189_0', '187_0', '8_0'],
-            size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2'],
-            key: ['KC_GRV', 'KC_1', 'KC_2', 'KC_3', 'KC_4', 'KC_5', 'KC_6', 'KC_7', 'KC_8', 'KC_9', 'KC_0', 'KC_MINS', 'KC_EQL', 'KC_BSPC']
-        }
-    ],
+    ansi: [{
+        val: ['Ctrl', 'Win', 'Alt', 'Spacebar', 'Alt', 'Win', 'Menu', 'Ctrl'],
+        keyCode: ['17_1', '91_1', '18_1', '32_0', '18_2', '92_0', '93_0', '17_2'],
+        size: ['1_25', '1_25', '1_25', '6_25', '1_25', '1_25', '1_25', '1_25'],
+        key: ['KC_LCTL', 'KC_LGUI', 'KC_LALT', 'KC_TRNS', 'KC_LALT', 'KC_LGUI', 'KC_APP', 'KC_LCTL']
+    }, {
+        val: ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift'],
+        keyCode: ['16_1', '90_0', '88_0', '67_0', '86_0', '66_0', '78_0', '77_0', '188_0', '190_0', '191_0', '16_2'],
+        size: ['2_25', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_75'],
+        key: ['KC_LSFT', 'KC_Z', 'KC_X', 'KC_C', 'KC_V', 'KC_B', 'KC_N', 'KC_M', 'KC_COMM', 'KC_DOT', 'KC_SLSH', 'KC_LSFT']
+    }, {
+        val: ['Caps Lock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter'],
+        keyCode: ['20_0', '65_0', '83_0', '68_0', '70_0', '71_0', '72_0', '74_0', '75_0', '76_0', '186_0', '222_0', '13_0'],
+        size: ['1_75', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2_25'],
+        key: ['KC_CAPS', 'KC_A', 'KC_S', 'KC_D', 'KC_F', 'KC_G', 'KC_H', 'KC_J', 'KC_K', 'KC_L', 'KC_SCLN', 'KC_QUOT', 'KC_ENT']
+    }, {
+        val: ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\/'],
+        keyCode: ['9_0', '81_0', '87_0', '69_0', '82_0', '84_0', '89_0', '85_0', '73_0', '79_0', '80_0', '219_0', '221_0', '220_0'],
+        size: ['1_5', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1_5'],
+        key: ['KC_TAB', 'KC_Q', 'KC_W', 'KC_E', 'KC_R', 'KC_T', 'KC_Y', 'KC_U', 'KC_I', 'KC_O', 'KC_P', 'KC_LBRC', 'KC_RBRC', 'KC_BSLS']
+    }, {
+        val: ['~', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Back Space'],
+        keyCode: ['192_0', '49_0', '50_0', '51_0', '52_0', '53_0', '54_0', '55_0', '56_0', '57_0', '48_0', '189_0', '187_0', '8_0'],
+        size: ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2'],
+        key: ['KC_GRV', 'KC_1', 'KC_2', 'KC_3', 'KC_4', 'KC_5', 'KC_6', 'KC_7', 'KC_8', 'KC_9', 'KC_0', 'KC_MINS', 'KC_EQL', 'KC_BSPC']
+    }],
     iso: [],
     jis: []
 };

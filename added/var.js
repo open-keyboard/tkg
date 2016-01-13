@@ -5,5 +5,6 @@
  * @version $Id$
  */
 
-var layerCount = 1;
+var layerCount = 0;
 var unFcous;
+
