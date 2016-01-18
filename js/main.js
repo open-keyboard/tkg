@@ -237,6 +237,7 @@ $(function() {
 
 	// parse layer
 	$('#layer-wrapper').on('blur_custom', 'textarea', function(event, $layer) {
+		// TODO blur parse layer
 		onLayerChange($layer, _layer_mode, _keyboard['physical_rows']);
 	});
 
@@ -263,6 +264,7 @@ $(function() {
 	});
 });
 
+// TODO download handle
 function download(id) {
 	var type = '';
 	var keymaps = [];
