@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.blue_grey-indigo.min.css" />
+<script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+<link rel="stylesheet" href="added/keycap.css">
+<style>
+    #fn_list {
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+        <!-- Title -->
+            <span class="mdl-layout-title">Title</span>
+        <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+    <!-- Your content goes here -->
+            <div id="fn_list">
+                <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Dol .c</button>
+            </div>
+            <div id="keyboard_container"></div>
+        </div>
+    </main>
+</div>
+</body>
+<script src="added/keymaps.js"></script>
+<script>
+    var keyboardContainer = document.getElementById('keyboard_container');
+    var layerCount = 0;
+    var unFcous;
+    function bindClick (dom) {
+        var keycaps = dom.querySelectorAll('.keycaps');
+        for (var i = 0; i < keycaps.length; i++) {
+            keycaps[i].addEventListener('click', function (e) {
+                var _this = e.target;
+                if (unFcous) {
+                    unFcous.classList.remove('focus_highlight');
+                }
+                unFcous = _this;
+                console.log(unFcous);
+                _this.classList.add('focus_highlight');
+            });
+        }
+    }
+    function initKeyboard () {
+        var ansi = KEY.ansi,
+            keyboard = document.createElement('div'),
+            rowCount = [8, 12, 13, 14, 14];
+        keyboard.setAttribute('class', 'keyboard layerCount_' + layerCount + ' clearfix');
+        for (var i = 5 - 1; i >= 0; i--) {
+            var row = document.createElement('div');
+            row.setAttribute('class', 'clearfix row-' + i);
+            for (var j = 0; j < rowCount[i]; j++) {
+                var keycaps = document.createElement('div');
+                keycaps.setAttribute('class', 'keycaps keycap_' + ansi[i].size[j] + ' code_' + ansi[i].keyCode[j] + '');
+                keycaps.setAttribute('data-key', ansi[i].key[j]);
+                keycaps.innerHTML = ansi[i].val[j];
+                row.appendChild(keycaps);
+            }
+            keyboard.appendChild(row);
+        }
+        keyboardContainer.appendChild(keyboard);
+        bindClick(document.querySelector('.layerCount_' + layerCount));
+        layerCount++;
+    }
+
+    initKeyboard();
+    function genKeyMap() {
+        for (var i = 0; i < layerCount; i++) {
+            KEY_MAP_GEN.ansi[i] = [];
+            console.log(document.querySelectorAll('.layerCount_' + i)[0].childNodes);
+            var rows = document.querySelectorAll('.layerCount_' + i)[0].childNodes;
+            for (var j = 0; j < rows.length; j++) {
+                var row = rows[j].querySelectorAll('.keycaps');
+                var arrayRow = [];
+                for (var k = 0; k < row.length; k++) {
+                    arrayRow.push(row[k].getAttribute('data-key'));
+                }
+                KEY_MAP_GEN.ansi[i].push(arrayRow);
+            }
+        }
+    }
+    document.onkeydown = function (e) {
+        console.log(e);
+        console.log(e.keyCode);
+        console.log(e.location);
+        console.log(KEYCODE[e.keyCode][e.location]);
+        if (document.querySelectorAll('.focus_highlight').length) {
+            e.preventDefault();
+            console.log(e.keyIdentifier);
+            document.querySelector('.focus_highlight').innerHTML = KEYCODE[e.keyCode][e.location];
+            document.querySelector('.focus_highlight').setAttribute('data-key', KEYCODE[e.keyCode]['key' + e.location]);
+            genKeyMap();
+            unFcous.classList.remove('focus_highlight');
+        }
+    };
+    document.querySelector('#dol_c').addEventListener('click', function(e) {
+        gen_c(KEY_MAP_GEN.ansi, {});
+    });
+</script>
+</html>

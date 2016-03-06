@@ -118,6 +118,10 @@
     background: #f80
 }
 
+.focus_highlight {
+    border-color: #d00;
+}
+
 .keyboard {
     position: relative;
     width: 840px;
