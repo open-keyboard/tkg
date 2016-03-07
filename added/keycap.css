@@ -12,55 +12,55 @@
 .keycap_6_5,
 .keycap_6_25,
 .keycap_7 {
-    height: 56px
+    height: 56px;
 }
 
 .keycap_1 {
-    width: 56px
+    width: 56px;
 }
 
 .keycap_1_25 {
-    width: 70px
+    width: 70px;
 }
 
 .keycap_1_5 {
-    width: 84px
+    width: 84px;
 }
 
 .keycap_1_75 {
-    width: 98px
+    width: 98px;
 }
 
 .keycap_2 {
-    width: 7pc
+    width: 7pc;
 }
 
 .keycap_2_25 {
-    width: 126px
+    width: 126px;
 }
 
 .keycap_2_75 {
-    width: 154px
+    width: 154px;
 }
 
 .keycap_5 {
-    width: 280px
+    width: 280px;
 }
 
 .keycap_6 {
-    width: 21pc
+    width: 21pc;
 }
 
 .keycap_6_25 {
-    width: 350px
+    width: 350px;
 }
 
 .keycap_6_5 {
-    width: 364px
+    width: 364px;
 }
 
 .keycap_7 {
-    width: 392px
+    width: 392px;
 }
 
 .keycaps {
@@ -78,13 +78,16 @@
 .keycap_enter,
 .keycap_plus {
     width: 56px;
-    height: 7pc
+    height: 7pc;
 }
 
 .keycap_enter_iso {
     border-bottom: transparent;
     width: 84px;
-    height: 56px
+    height: 56px;
+    position: absolute;
+    right: 0;
+    top: -56px;
 }
 
 .keycap_enter_iso:before {
@@ -92,7 +95,7 @@
     left: -7px;
     width: 21px;
     border-left: 7px solid #ddd;
-    border-bottom: 7px solid #aaa
+    border-bottom: 7px solid #aaa;
 }
 
 .keycap_enter_iso:after,
@@ -100,7 +103,7 @@
     content: "";
     display: block;
     position: absolute;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .keycap_enter_iso:after {
@@ -111,21 +114,31 @@
     border: 7px solid #ddd;
     border-top: transparent;
     border-right: 7px solid #aaa;
-    border-bottom: 7px solid #aaa
+    border-bottom: 7px solid #aaa;
+}
+
+.keycap_0 {
+    width: 0;
+    height: 0;
+    border: solid 0;
 }
 
 .highlight {
-    background: #f80
+    background: #f80;
 }
 
 .focus_highlight {
+    border-color: #d00;
+}
+.focus_highlight.keycap_enter_iso:after,
+.focus_highlight.keycap_enter_iso:before {
     border-color: #d00;
 }
 
 .keyboard {
     position: relative;
     width: 840px;
-    height: 280px
+    height: 280px;
 }
 
 .row-0,
@@ -136,44 +149,44 @@
 .row-5 {
     position: absolute;
     width: 100%;
-    left: 0
+    left: 0;
 }
 
 .row-0 {
-    top: 224px
+    top: 224px;
 }
 
 .row-1 {
-    top: 168px
+    top: 168px;
 }
 
 .row-2 {
-    top: 112px
+    top: 112px;
 }
 
 .row-3 {
-    top: 56px
+    top: 56px;
 }
 
 .row-4 {
-    top: 0
+    top: 0;
 }
 
 .row-5 {
-    top: 0
+    top: 0;
 }
 
 .blank_1 {
-    width: 56px
+    width: 56px;
 }
 
 .blank_0_66,
 .blank_1 {
     position: relative;
     float: left;
-    height: 56px
+    height: 56px;
 }
 
 .blank_0_66 {
-    width: 2.31pc
+    width: 2.31pc;
 }

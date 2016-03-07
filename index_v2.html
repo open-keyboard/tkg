@@ -49,7 +49,7 @@
         <div class="page-content">
     <!-- Your content goes here -->
             <div id="fn_list">
-                <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Dol .c</button>
+                <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .c file</button>
             </div>
             <div id="keyboard_container"></div>
         </div>
@@ -70,24 +70,25 @@
                     unFcous.classList.remove('focus_highlight');
                 }
                 unFcous = _this;
-                console.log(unFcous);
+                // console.log(unFcous);
                 _this.classList.add('focus_highlight');
             });
         }
     }
-    function initKeyboard () {
-        var ansi = KEY.ansi,
+    function initKeyboard (layoutType) {
+        var layoutType = layoutType || 'ansi';
+            layout = LAYOUT[layoutType],
             keyboard = document.createElement('div'),
-            rowCount = [8, 12, 13, 14, 14];
+            rowCount = 14;
         keyboard.setAttribute('class', 'keyboard layerCount_' + layerCount + ' clearfix');
         for (var i = 5 - 1; i >= 0; i--) {
             var row = document.createElement('div');
             row.setAttribute('class', 'clearfix row-' + i);
-            for (var j = 0; j < rowCount[i]; j++) {
+            for (var j = 0; j < rowCount; j++) {
                 var keycaps = document.createElement('div');
-                keycaps.setAttribute('class', 'keycaps keycap_' + ansi[i].size[j] + ' code_' + ansi[i].keyCode[j] + '');
-                keycaps.setAttribute('data-key', ansi[i].key[j]);
-                keycaps.innerHTML = ansi[i].val[j];
+                keycaps.setAttribute('class', 'keycaps keycap_' + layout[i].size[j] + ' code_' + layout[i].keyCode[j] + '');
+                keycaps.setAttribute('data-key', layout[i].key[j]);
+                keycaps.innerHTML = layout[i].val[j];
                 row.appendChild(keycaps);
             }
             keyboard.appendChild(row);
@@ -97,11 +98,10 @@
         layerCount++;
     }
 
-    initKeyboard();
+    initKeyboard('ansi');
     function genKeyMap() {
         for (var i = 0; i < layerCount; i++) {
             KEY_MAP_GEN.ansi[i] = [];
-            console.log(document.querySelectorAll('.layerCount_' + i)[0].childNodes);
             var rows = document.querySelectorAll('.layerCount_' + i)[0].childNodes;
             for (var j = 0; j < rows.length; j++) {
                 var row = rows[j].querySelectorAll('.keycaps');
@@ -114,13 +114,13 @@
         }
     }
     document.onkeydown = function (e) {
-        console.log(e);
-        console.log(e.keyCode);
-        console.log(e.location);
-        console.log(KEYCODE[e.keyCode][e.location]);
+        // console.log(e);
+        // console.log(e.keyCode);
+        // console.log(e.location);
+        // console.log(KEYCODE[e.keyCode][e.location]);
         if (document.querySelectorAll('.focus_highlight').length) {
             e.preventDefault();
-            console.log(e.keyIdentifier);
+            // console.log(e.keyIdentifier);
             document.querySelector('.focus_highlight').innerHTML = KEYCODE[e.keyCode][e.location];
             document.querySelector('.focus_highlight').setAttribute('data-key', KEYCODE[e.keyCode]['key' + e.location]);
             genKeyMap();

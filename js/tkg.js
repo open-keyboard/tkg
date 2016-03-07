@@ -1231,7 +1231,7 @@ function TKG() {
 
 		return matrix;
 	}
-
+	// TODO eep keymap
 	var _generateKeymapHex = function(matrix) {
 		var keymap = [];
 		var default_keycode = 0;
@@ -1247,6 +1247,7 @@ function TKG() {
 				}
 			}
 		}
+		console.info('+++++++++++++', keymap);
 		return keymap;
 	}
 
