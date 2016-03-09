@@ -46,7 +46,7 @@ function gen_c(keymap, fn) {
         return urlData;
     }
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../download.php?file=c');
+    xhr.open('POST', '/tkg/download.php?file=c');
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(formUrlEncode(obj));
     xhr.onreadystatechange = function() {

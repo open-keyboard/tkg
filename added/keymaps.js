@@ -58,7 +58,7 @@ var KEYCODE = {
         '0': 'Pause Break',
         '1': '',
         '2': '',
-        'key0': 'KC_PAUSE'
+        'key0': 'KC_PAUS'
     },
     '20': {
         '0': 'Caps Lock',
@@ -70,7 +70,7 @@ var KEYCODE = {
         '0': 'Esc',
         '1': '',
         '2': '',
-        'key0': 'KC_ESCAPE'
+        'key0': 'KC_ESC'
     },
     '32': {
         '0': 'Spacebar',
@@ -88,7 +88,7 @@ var KEYCODE = {
         '0': 'Page Down',
         '1': '',
         '2': '',
-        'key0': 'KC_PGDOWN'
+        'key0': 'KC_PGDN'
     },
     '35': {
         '0': 'End',
@@ -130,19 +130,19 @@ var KEYCODE = {
         '0': 'Print Screen',
         '1': '',
         '2': '',
-        'key0': 'KC_PSCREEN'
+        'key0': 'KC_PSCR'
     },
     '45': {
         '0': 'Insert',
         '1': '',
         '2': '',
-        'key0': 'KC_INSERT'
+        'key0': 'KC_INS'
     },
     '46': {
         '0': 'Delete',
         '1': '',
         '2': '',
-        'key0': 'KC_DELETE'
+        'key0': 'KC_DEL'
     },
     '48': {
         '0': '0',
@@ -545,13 +545,13 @@ var KEYCODE = {
         '0': 'Scroll Lock',
         '1': '',
         '2': '',
-        'key0': 'KC_SCROLLLOCK'
+        'key0': 'KC_SLCK'
     },
     '186': {
         '0': ';',
         '1': '',
         '2': '',
-        'key0': 'KC_SCOLON'
+        'key0': 'KC_SCLN'
     },
     '187': {
         '0': '=',

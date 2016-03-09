@@ -12,8 +12,48 @@
 <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
 <link rel="stylesheet" href="added/keycap.css">
 <style>
-    #fn_list {
+    .material-design-form-select {
+        position: relative;
+        display: inline-block;
+    }
+    .material-design-form-select::after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        margin-top: -7px;
+        width: 10px;
+        height: 10px;
+        border-left: solid 2px #999;
+        border-bottom: solid 2px #999;
+        box-sizing: border-box;
+        transform: rotate(-45deg);
+    }
+    .material-design-form-select select {
+        padding: 5px 30px 5px 5px;
+        border: solid 1px #eee;
+        border-radius: 1px;
+        box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: transparent;
+        font-size: 16px;
+        line-height: 1;
+    }
+    .material-design-form-select select:focus {
+        outline: none;
+        outline-offset: 0;
+        box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.7);
+    }
+    .page-content {
         margin: 10px;
+    }
+    #fn_list {
+        margin-bottom: 10px;
+    }
+    #fn_list div, #fn_list button {
+        vertical-align: middle;
     }
 </style>
 </head>
@@ -49,18 +89,28 @@
         <div class="page-content">
     <!-- Your content goes here -->
             <div id="fn_list">
+                <div class="material-design-form-select">
+                    <select name="" id="layout_select">
+                        <option value="ansi">ANSI</option>
+                        <!-- <option value="iso">ISO</option> -->
+                        <!-- <option value="iso">JIS</option> -->
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
                 <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .c file</button>
             </div>
-            <div id="keyboard_container"></div>
+        <div id="keyboard_container"></div>
         </div>
     </main>
 </div>
 </body>
 <script src="added/keymaps.js"></script>
+<script src="added/gen_c.js"></script>
 <script>
     var keyboardContainer = document.getElementById('keyboard_container');
     var layerCount = 0;
     var unFcous;
+    keyboardLayout = 'ansi';
     function bindClick (dom) {
         var keycaps = dom.querySelectorAll('.keycaps');
         for (var i = 0; i < keycaps.length; i++) {
@@ -76,7 +126,7 @@
         }
     }
     function initKeyboard (layoutType) {
-        var layoutType = layoutType || 'ansi';
+        var layoutType = layoutType || 'ansi',
             layout = LAYOUT[layoutType],
             keyboard = document.createElement('div'),
             rowCount = 14;
@@ -98,10 +148,11 @@
         layerCount++;
     }
 
-    initKeyboard('ansi');
+    initKeyboard(keyboardLayout);
     function genKeyMap() {
+        console.log(KEY_MAP_GEN[keyboardLayout]);
         for (var i = 0; i < layerCount; i++) {
-            KEY_MAP_GEN.ansi[i] = [];
+            KEY_MAP_GEN[keyboardLayout][i] = [];
             var rows = document.querySelectorAll('.layerCount_' + i)[0].childNodes;
             for (var j = 0; j < rows.length; j++) {
                 var row = rows[j].querySelectorAll('.keycaps');
@@ -109,7 +160,7 @@
                 for (var k = 0; k < row.length; k++) {
                     arrayRow.push(row[k].getAttribute('data-key'));
                 }
-                KEY_MAP_GEN.ansi[i].push(arrayRow);
+                KEY_MAP_GEN[keyboardLayout][i].push(arrayRow);
             }
         }
     }
@@ -127,8 +178,16 @@
             unFcous.classList.remove('focus_highlight');
         }
     };
+    document.querySelector('#layout_select').addEventListener('change', function(e) {
+        console.log(e.target.options[e.target.selectedIndex].value);
+        var value = e.target.options[e.target.selectedIndex].value;
+        keyboardLayout = value;
+        layerCount = 0;
+        keyboardContainer.innerHTML = '';
+        initKeyboard(value);
+    });
     document.querySelector('#dol_c').addEventListener('click', function(e) {
-        gen_c(KEY_MAP_GEN.ansi, {});
+        gen_c(KEY_MAP_GEN[keyboardLayout], {});
     });
 </script>
 </html>
