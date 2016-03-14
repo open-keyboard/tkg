@@ -94,7 +94,7 @@
                         <option value="ansi">ANSI</option>
                         <!-- <option value="iso">ISO</option> -->
                         <!-- <option value="iso">JIS</option> -->
-                        <option value="custom">Custom</option>
+                        <option value="customI">Custom I</option>
                     </select>
                 </div>
                 <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .c file</button>
@@ -136,6 +136,7 @@
             row.setAttribute('class', 'clearfix row-' + i);
             for (var j = 0; j < rowCount; j++) {
                 var keycaps = document.createElement('div');
+                keycaps.setAttribute('id', 'matrix_' + i + '_' + j);
                 keycaps.setAttribute('class', 'keycaps keycap_' + layout[i].size[j] + ' code_' + layout[i].keyCode[j] + '');
                 keycaps.setAttribute('data-key', layout[i].key[j]);
                 keycaps.innerHTML = layout[i].val[j];
@@ -172,8 +173,21 @@
         if (document.querySelectorAll('.focus_highlight').length) {
             e.preventDefault();
             // console.log(e.keyIdentifier);
-            document.querySelector('.focus_highlight').innerHTML = KEYCODE[e.keyCode][e.location];
-            document.querySelector('.focus_highlight').setAttribute('data-key', KEYCODE[e.keyCode]['key' + e.location]);
+            var highlight = document.querySelector('.focus_highlight'),
+                keyCode = KEYCODE[e.keyCode]['key' + e.location];
+            highlight.innerHTML = KEYCODE[e.keyCode][e.location];
+            // HACK
+            // prefix customI
+            if (keyboardLayout === 'customI') {
+                if (highlight.getAttribute('id') === 'matrix_1_12') {
+                    document.getElementById('matrix_1_13').setAttribute('data-key', keyCode);
+                }
+                if (highlight.getAttribute('id') === 'matrix_1_13') {
+                    document.getElementById('matrix_1_12').setAttribute('data-key', keyCode);
+                }
+            } else {
+                highlight.setAttribute('data-key', keyCode);
+            }
             genKeyMap();
             unFcous.classList.remove('focus_highlight');
         }
