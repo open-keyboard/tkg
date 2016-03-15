@@ -9,10 +9,15 @@
 <link href="" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.blue_grey-indigo.min.css" />
+<!-- <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.grey-indigo.min.css" /> -->
 <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
 <link rel="stylesheet" href="added/keycap.css">
 <style>
+    body {
+        background: #eee;
+    }
     .material-design-form-select {
+        z-index: 0;
         position: relative;
         display: inline-block;
     }
@@ -25,8 +30,8 @@
         margin-top: -7px;
         width: 10px;
         height: 10px;
-        border-left: solid 2px #999;
-        border-bottom: solid 2px #999;
+        border-left: solid 2px rgb(96,125,139);
+        border-bottom: solid 2px rgb(96,125,139);
         box-sizing: border-box;
         transform: rotate(-45deg);
     }
@@ -34,7 +39,7 @@
         padding: 5px 30px 5px 5px;
         border: solid 1px #eee;
         border-radius: 1px;
-        box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
         -webkit-appearance: none;
         -moz-appearance: none;
         background: transparent;
@@ -44,16 +49,30 @@
     .material-design-form-select select:focus {
         outline: none;
         outline-offset: 0;
-        box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.7);
-    }
-    .page-content {
-        margin: 10px;
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.5);
     }
     #fn_list {
-        margin-bottom: 10px;
+        padding: 10px;
+        background: rgb(158,158,158);
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     }
     #fn_list div, #fn_list button {
         vertical-align: middle;
+    }
+    #layout_select {
+        color: #141414;
+        border: 0;
+    }
+    #dol_c, #dol_eep {
+        margin-left: 10px;
+        float: right;
+    }
+    .card_keyboard {
+        width: calc(840px + 32px);
+        margin: 10px;
+    }
+    .mdl-card__supporting-text {
+        width: 100%;
     }
 </style>
 </head>
@@ -85,20 +104,24 @@
             <a class="mdl-navigation__link" href="">Link</a>
         </nav>
     </div>
+    <div id="fn_list">
+        <div class="material-design-form-select">
+            <select name="" id="layout_select">
+                <option value="ansi">ANSI</option>
+                <!-- <option value="iso">ISO</option> -->
+                <!-- <option value="iso">JIS</option> -->
+                <option value="customI">Custom I</option>
+            </select>
+        </div>
+        <button id="add_key" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Add other key</button>
+        <button id="add_layer" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Add layer</button>
+        <button id="add_fn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Fn behavior</button>
+        <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .c file</button>
+        <button id="dol_eep" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .eep file</button>
+    </div>
     <main class="mdl-layout__content">
         <div class="page-content">
     <!-- Your content goes here -->
-            <div id="fn_list">
-                <div class="material-design-form-select">
-                    <select name="" id="layout_select">
-                        <option value="ansi">ANSI</option>
-                        <!-- <option value="iso">ISO</option> -->
-                        <!-- <option value="iso">JIS</option> -->
-                        <option value="customI">Custom I</option>
-                    </select>
-                </div>
-                <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .c file</button>
-            </div>
         <div id="keyboard_container"></div>
         </div>
     </main>
@@ -111,6 +134,24 @@
     var layerCount = 0;
     var unFcous;
     keyboardLayout = 'ansi';
+    function initCard (dom, cardClass) {
+        var card, title, content, menu;
+        card = document.createElement('div');
+        card.setAttribute('class', 'demo-card-wide mdl-card mdl-shadow--2dp ' + cardClass);
+        title = document.createElement('div');
+        title.setAttribute('class', 'mdl-card__title');
+        title.innerHTML = '<h2 class="mdl-card__title-text"> Layer ' + (layerCount + 1) + '</h2>';
+        card.appendChild(title);
+        content = document.createElement('div');
+        content.setAttribute('class', 'mdl-card__supporting-text');
+        content.appendChild(dom);
+        card.appendChild(content);
+        menu = document.createElement('div');
+        menu.setAttribute('class', 'mdl-card__menu');
+        menu.innerHTML = '<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">X</button>';
+        card.appendChild(menu);
+        return card;
+    }
     function bindClick (dom) {
         var keycaps = dom.querySelectorAll('.keycaps');
         for (var i = 0; i < keycaps.length; i++) {
@@ -130,7 +171,7 @@
             layout = LAYOUT[layoutType],
             keyboard = document.createElement('div'),
             rowCount = 14;
-        keyboard.setAttribute('class', 'keyboard layerCount_' + layerCount + ' clearfix');
+        keyboard.setAttribute('class', 'keyboard layerCount_' + layerCount);
         for (var i = 5 - 1; i >= 0; i--) {
             var row = document.createElement('div');
             row.setAttribute('class', 'clearfix row-' + i);
@@ -144,7 +185,7 @@
             }
             keyboard.appendChild(row);
         }
-        keyboardContainer.appendChild(keyboard);
+        keyboardContainer.appendChild(initCard(keyboard, 'card_keyboard'));
         bindClick(document.querySelector('.layerCount_' + layerCount));
         layerCount++;
     }
