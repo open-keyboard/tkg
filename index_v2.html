@@ -74,6 +74,34 @@
     .mdl-card__supporting-text {
         width: 100%;
     }
+    #keyboard_container {
+        margin: 0 auto;
+    }
+    @media only screen and (min-width: 892px) {
+        #keyboard_container {
+            width: 892px;
+        }
+    }
+    @media only screen and (min-width: 1784px) {
+        #keyboard_container {
+            width: 1784px;
+        }
+    }
+    @media only screen and (min-width: 2676px) {
+        #keyboard_container {
+            width: 2676px;
+        }
+    }
+    @media only screen and (min-width: 3568px) {
+        #keyboard_container {
+            width: 3568px;
+        }
+    }
+    @media only screen and (min-width: 4460px) {
+        #keyboard_container {
+            width: 4460px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -187,6 +215,7 @@
         }
         keyboardContainer.appendChild(initCard(keyboard, 'card_keyboard'));
         bindClick(document.querySelector('.layerCount_' + layerCount));
+        genKeyMap();
         layerCount++;
     }
 
