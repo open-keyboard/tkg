@@ -16,6 +16,10 @@
     body {
         background: #eee;
     }
+    ..mdl-card {
+        /* Fixed card layout for this case */
+        display: inline-block;
+    }
     .material-design-form-select {
         z-index: 0;
         position: relative;
@@ -149,19 +153,49 @@
     </div>
     <main class="mdl-layout__content">
         <div class="page-content">
-    <!-- Your content goes here -->
-        <div id="keyboard_container"></div>
+            <!-- Your content goes here -->
+            <div id="keyboard_container"></div>
         </div>
+        <dialog class="mdl-dialog">
+            <h4 class="mdl-dialog__title">Allow data collection?</h4>
+            <div class="mdl-dialog__content">
+                <span data-key="KC_CUT">KC_CUT</span>
+                <span data-key="KC_COPY">KC_COPY</span>
+                <span data-key="KC_PASTE">KC_PASTE</span>
+                <span data-key="KC_FIND">KC_FIND</span>
+                <span data-key="KC__MUTE">KC__MUTE</span>
+                <span data-key="KC__VOLUP">KC__VOLUP</span>
+                <span data-key="KC__VOLDOWN">KC__VOLDOWN</span>
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button close">Disagree</button>
+            </div>
+        </dialog>
     </main>
 </div>
 </body>
+<script>
+    var dialog = document.querySelector('dialog');
+    var showDialogButton = document.querySelector('#add_key');
+    if (!dialog.showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    showDialogButton.addEventListener('click', function() {
+      dialog.showModal();
+    });
+    dialog.querySelector('.close').addEventListener('click', function() {
+      dialog.close();
+    });
+</script>
 <script src="added/keymaps.js"></script>
 <script src="added/gen_c.js"></script>
 <script>
     var keyboardContainer = document.getElementById('keyboard_container');
     var layerCount = 0;
     var unFcous;
-    keyboardLayout = 'ansi';
+
+    var keyboardLayout = 'ansi';
+
     function initCard (dom, cardClass) {
         var card, title, content, menu;
         card = document.createElement('div');
@@ -176,10 +210,18 @@
         card.appendChild(content);
         menu = document.createElement('div');
         menu.setAttribute('class', 'mdl-card__menu');
-        menu.innerHTML = '<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">X</button>';
+        menu.innerHTML = '<a class="close_layer" href="javascript:void(0);">' +
+            '<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' +
+                '<g>' +
+                    '<line y2="32" x2="32" y1="0" x1="0" stroke-width="2" stroke="#000000" fill="none"/>' +
+                    '<line y2="0" x2="32" y1="32" x1="0" stroke-width="2" stroke="#000000" fill="none"/>' +
+                '</g>' +
+            '</svg>' +
+        '</a>';
         card.appendChild(menu);
         return card;
     }
+
     function bindClick (dom) {
         var keycaps = dom.querySelectorAll('.keycaps');
         for (var i = 0; i < keycaps.length; i++) {
@@ -194,6 +236,7 @@
             });
         }
     }
+
     function initKeyboard (layoutType) {
         var layoutType = layoutType || 'ansi',
             layout = LAYOUT[layoutType],
@@ -220,6 +263,7 @@
     }
 
     initKeyboard(keyboardLayout);
+
     function genKeyMap() {
         console.log(KEY_MAP_GEN[keyboardLayout]);
         for (var i = 0; i < layerCount; i++) {
@@ -235,6 +279,7 @@
             }
         }
     }
+
     document.onkeydown = function (e) {
         // console.log(e);
         // console.log(e.keyCode);
@@ -255,21 +300,28 @@
                 if (highlight.getAttribute('id') === 'matrix_1_13') {
                     document.getElementById('matrix_1_12').setAttribute('data-key', keyCode);
                 }
-            } else {
-                highlight.setAttribute('data-key', keyCode);
             }
+            highlight.setAttribute('data-key', keyCode);
             genKeyMap();
             unFcous.classList.remove('focus_highlight');
         }
     };
+
     document.querySelector('#layout_select').addEventListener('change', function(e) {
         console.log(e.target.options[e.target.selectedIndex].value);
         var value = e.target.options[e.target.selectedIndex].value;
         keyboardLayout = value;
+        KEY_MAP_GEN = {
+            ansi: {},
+            iso: {},
+            jis: {},
+            customI: {}
+        };
         layerCount = 0;
         keyboardContainer.innerHTML = '';
-        initKeyboard(value);
+        initKeyboard(keyboardLayout);
     });
+
     document.querySelector('#dol_c').addEventListener('click', function(e) {
         gen_c(KEY_MAP_GEN[keyboardLayout], {});
     });
