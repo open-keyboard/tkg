@@ -45,41 +45,50 @@ function gen_c(keymap, fn) {
         urlData = urlData.substr(0, (urlData.length - 1));
         return urlData;
     }
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/tkg/download.php?file=c');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send(formUrlEncode(obj));
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                console.log(xhr.responseText);
-                var blob = new Blob([xhr.responseText]),
-                    link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'keymap_tkg.c';
-                link.click();
-                window.URL.revokeObjectURL(link.href);
-            }
-        }
-    }
-    // var dolForm = document.querySelector('#dl_form');
-    // if (dolForm) {
-    //     dolForm.outerHTML = '';
-    //     delete dolForm;
+    console.log(obj);
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/tkg/download.php?file=c');
+    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // xhr.send(formUrlEncode(obj));
+    // xhr.onreadystatechange = function() {
+    //     if (xhr.readyState == 4) {
+    //         if (xhr.status == 200) {
+    //             console.log(xhr.responseText);
+    //             var blob = new Blob([xhr.responseText]),
+    //                 link = document.createElement('a');
+    //             link.href = window.URL.createObjectURL(blob);
+    //             link.download = 'keymap_tkg.c';
+    //             link.click();
+    //             window.URL.revokeObjectURL(link.href);
+    //         }
+    //     }
     // }
-    // var form = document.createElement('form');
-    //     form.setAttribute('id', 'dl_form');
-    //     form.setAttribute('action', '/tkg/download.php?file=c');
-    //     form.setAttribute('method', 'POST');
-    //     form.innerHTML = '<input type="hidden" name="matrix_rows" value="' + obj.matrix_rows + '">' +
-    //         '<input type="hidden" name="matrix_cols" value="' + obj.matrix_cols + '">' +
-    //         '<input type="hidden" name="matrix_size" value="' + obj.matrix_size + '">' +
-    //         '<input type="hidden" name="max_layers" value="' + obj.max_layers + '">' +
-    //         '<input type="hidden" name="max_fns" value="' + obj.max_fns + '">' +
-    //         '<input type="hidden" name="eep_size" value="' + obj.eep_size + '">' +
-    //         '<input type="hidden" name="eep_start" value="' + obj.eep_start + '">' +
-    //         '<input type="hidden" name="keymaps" value="' + obj.keymaps + '">' +
-    //         '<input type="hidden" name="fn_actions" value="' + obj.fn_actions + '">';
-    // document.body.appendChild(form);
-    // form.submit();
+
+    function genInput(form, value) {
+        var s = document.createElement('input');
+        s.setAttribute('type', 'hidden');
+        s.setAttribute('name', value);
+        s.setAttribute('value', obj[value]);
+        form.appendChild(s);
+    }
+    var dolForm = document.querySelector('#dl_form');
+    if (dolForm) {
+        dolForm.outerHTML = '';
+        delete dolForm;
+    }
+    var form = document.createElement('form');
+    form.setAttribute('id', 'dl_form');
+    form.setAttribute('action', '/tkg/download.php?file=c');
+    form.setAttribute('method', 'POST');
+    genInput(form, 'matrix_rows');
+    genInput(form, 'matrix_cols');
+    genInput(form, 'matrix_size');
+    genInput(form, 'max_layers');
+    genInput(form, 'max_fns');
+    genInput(form, 'eep_size');
+    genInput(form, 'eep_start');
+    genInput(form, 'keymaps');
+    genInput(form, 'fn_actions');
+    document.body.appendChild(form);
+    form.submit();
 }
