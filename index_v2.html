@@ -8,9 +8,9 @@
 <meta name="keywords" content="">
 <link href="" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.blue_grey-indigo.min.css" />
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.blue_grey-indigo.min.css" />
 <!-- <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.grey-indigo.min.css" /> -->
-<script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 <link rel="stylesheet" href="added/keycap.css">
 <style>
     body {
@@ -115,78 +115,53 @@
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
         <!-- Title -->
-            <span class="mdl-layout-title">Title</span>
+            <span class="mdl-layout-title">Open Keyboard</span>
         <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
             <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <!-- <a class="mdl-navigation__link" href="">Link</a>
                 <a class="mdl-navigation__link" href="">Link</a>
                 <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a> -->
             </nav>
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Title</span>
         <nav class="mdl-navigation">
+            <!-- <a class="mdl-navigation__link" href="">Link</a>
             <a class="mdl-navigation__link" href="">Link</a>
             <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a> -->
         </nav>
     </div>
     <div id="fn_list">
-        <div class="material-design-form-select">
-            <select name="" id="layout_select">
-                <option value="ansi">ANSI</option>
-                <!-- <option value="iso">ISO</option> -->
-                <!-- <option value="iso">JIS</option> -->
-                <option value="customI">Custom I</option>
-            </select>
-        </div>
-        <button id="add_key" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Add other key</button>
-        <button id="add_layer" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Add layer</button>
-        <button id="add_fn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Fn behavior</button>
+        <span>
+            <label for="layout_select">Layout Select</label>
+            <div class="material-design-form-select">
+                <select name="" id="layout_select">
+                    <option value="ansi">ANSI</option>
+                    <!-- <option value="iso">ISO</option> -->
+                    <!-- <option value="iso">JIS</option> -->
+                    <option value="customI">Custom I</option>
+                </select>
+            </div>
+        </span>
+        <!-- <button id="add_key" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Add other key</button> -->
+        <!-- <button id="add_layer" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Add layer</button> -->
+        <!-- <button id="add_fn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Fn behavior</button> -->
         <button id="dol_c" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .c file</button>
-        <button id="dol_eep" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .eep file</button>
+        <!-- <button id="dol_eep" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">download .eep file</button> -->
     </div>
     <main class="mdl-layout__content">
         <div class="page-content">
             <!-- Your content goes here -->
             <div id="keyboard_container"></div>
         </div>
-        <dialog class="mdl-dialog">
-            <h4 class="mdl-dialog__title">Allow data collection?</h4>
-            <div class="mdl-dialog__content">
-                <span data-key="KC_CUT">KC_CUT</span>
-                <span data-key="KC_COPY">KC_COPY</span>
-                <span data-key="KC_PASTE">KC_PASTE</span>
-                <span data-key="KC_FIND">KC_FIND</span>
-                <span data-key="KC__MUTE">KC__MUTE</span>
-                <span data-key="KC__VOLUP">KC__VOLUP</span>
-                <span data-key="KC__VOLDOWN">KC__VOLDOWN</span>
-            </div>
-            <div class="mdl-dialog__actions">
-                <button type="button" class="mdl-button close">Disagree</button>
-            </div>
-        </dialog>
     </main>
 </div>
 </body>
-<script>
-    var dialog = document.querySelector('dialog');
-    var showDialogButton = document.querySelector('#add_key');
-    if (!dialog.showModal) {
-      dialogPolyfill.registerDialog(dialog);
-    }
-    showDialogButton.addEventListener('click', function() {
-      dialog.showModal();
-    });
-    dialog.querySelector('.close').addEventListener('click', function() {
-      dialog.close();
-    });
-</script>
 <script src="added/keymaps.js"></script>
 <script src="added/gen_c.js"></script>
 <script>
@@ -210,14 +185,14 @@
         card.appendChild(content);
         menu = document.createElement('div');
         menu.setAttribute('class', 'mdl-card__menu');
-        menu.innerHTML = '<a class="close_layer" href="javascript:void(0);">' +
-            '<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' +
-                '<g>' +
-                    '<line y2="32" x2="32" y1="0" x1="0" stroke-width="2" stroke="#000000" fill="none"/>' +
-                    '<line y2="0" x2="32" y1="32" x1="0" stroke-width="2" stroke="#000000" fill="none"/>' +
-                '</g>' +
-            '</svg>' +
-        '</a>';
+        // menu.innerHTML = '<a class="close_layer" href="javascript:void(0);">' +
+        //     '<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' +
+        //         '<g>' +
+        //             '<line y2="32" x2="32" y1="0" x1="0" stroke-width="2" stroke="#000000" fill="none"/>' +
+        //             '<line y2="0" x2="32" y1="32" x1="0" stroke-width="2" stroke="#000000" fill="none"/>' +
+        //         '</g>' +
+        //     '</svg>' +
+        // '</a>';
         card.appendChild(menu);
         return card;
     }
@@ -258,15 +233,15 @@
         }
         keyboardContainer.appendChild(initCard(keyboard, 'card_keyboard'));
         bindClick(document.querySelector('.layerCount_' + layerCount));
-        genKeyMap();
         layerCount++;
+        genKeyMap();
     }
 
     initKeyboard(keyboardLayout);
 
     function genKeyMap() {
-        console.log(KEY_MAP_GEN[keyboardLayout]);
         for (var i = 0; i < layerCount; i++) {
+            console.log(i);
             KEY_MAP_GEN[keyboardLayout][i] = [];
             var rows = document.querySelectorAll('.layerCount_' + i)[0].childNodes;
             for (var j = 0; j < rows.length; j++) {
@@ -278,6 +253,7 @@
                 KEY_MAP_GEN[keyboardLayout][i].push(arrayRow);
             }
         }
+        console.log(KEY_MAP_GEN[keyboardLayout]);
     }
 
     document.onkeydown = function (e) {
@@ -291,8 +267,8 @@
             var highlight = document.querySelector('.focus_highlight'),
                 keyCode = KEYCODE[e.keyCode]['key' + e.location];
             highlight.innerHTML = KEYCODE[e.keyCode][e.location];
-            // HACK
-            // prefix customI
+            // Workround
+            // fix customI
             if (keyboardLayout === 'customI') {
                 if (highlight.getAttribute('id') === 'matrix_1_12') {
                     document.getElementById('matrix_1_13').setAttribute('data-key', keyCode);
